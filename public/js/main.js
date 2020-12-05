@@ -1,5 +1,6 @@
 const mediaStreamConstraints = {
-    video: true
+    video: true,
+    audio: true
 };
 const offerOptions = {
     offerToReceiveVideo: 1,
@@ -16,7 +17,7 @@ function gotRemoteStream(event, userId) {
     remoteVideo.setAttribute('data-socket', userId);
     remoteVideo.srcObject   = event.stream;
     remoteVideo.autoplay    = true;
-    remoteVideo.muted       = true;
+    // remoteVideo.muted       = true;
     remoteVideo.playsinline = true;
     document.querySelector('.videos').appendChild(remoteVideo);
 }

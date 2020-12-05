@@ -82,6 +82,8 @@ function connectSocketToSignaling() {
         socket.on('signaling', (data) => {
             gotMessageFromSignaling(socket, data);
         });
+
+
     });
 }
 

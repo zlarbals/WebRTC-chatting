@@ -2,56 +2,8 @@
 <html>
 
 <head>
-
-    <title>Realtime communication with WebRTC</title>
-
+    <title>Video Chatting with WebRTC</title>
     <link rel="stylesheet" href="css/style.css" />
-    <style>
-        .msgLine {
-            margin: 15px;
-        }
-
-        .msgBox {
-            border: 1px solid black;
-            background: skyblue;
-            padding: 2px 5px;
-            border-radius: 10px;
-        }
-
-        #container {
-            width: 400px;
-            height: 400px;
-            border: 1px solid black;
-            background: ivory;
-            float:right;
-        }
-
-        #chatView {
-            height: 90%;
-            overflow-y: scroll;
-        }
-
-        #chatForm {
-            height: 10%;
-            border-top: 1px solid black;
-            text-align: center;
-        }
-
-        #msg {
-            width: 80%;
-            height: 32px;
-            border-radius: 8px;
-        }
-
-        #send {
-            width: 16%;
-            height: 34px;
-            border-radius: 50px;
-            background: black;
-            color: white;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -61,8 +13,6 @@
     </div>
 
     <br />
-    <div id="connections"></div>
-
 
     <div id="container">
         <div id="chatView">
@@ -88,26 +38,35 @@
         chatForm.addEventListener('submit', function () {
             var msg = $('#msg');
 
+            //메시지 입력창이 비어있는데 눌르면 return;
             if (msg.val() == "") {
                 return;
             } else {
+                //socket으로 msg 내용을 보냄.
                 socket.emit('SEND', msg.val());
 
                 var msgLine = $('<div class="msgLine">');
-                var msgBox = $('<div class="me">');
+                //상대가 보낸 메시지와 내가 보낸 메시지 차이두기.
+                var msgBox = $('<div class="myMsgBox">');
 
                 msgBox.append(msg.val());
                 msgBox.css('display', 'inline-block');
+                //오른쪽
                 msgLine.css('text-align', 'right');
+                //라인 하나를 차지하기 위해서 msgBox에 msgLine 집어넣기.
                 msgLine.append(msgBox);
 
+                //채팅창에 masLine 붙이기.
                 $('#chatView').append(msgLine);
 
+                //메시지 입력하는 곳 비우기.
                 msg.val("");
                 chatView.scrollTop = chatView.scrollHeight;
             }
         });
 
+        //상대방이 메시지 송신 시 송신자 제외하고 수신.
+        //index.js에서 소켓 통신으로 보내줌.
         socket.on('SEND', function (msg) {
             var msgLine = $('<div class="msgLine">');
             var msgBox = $('<div class="msgBox">');
@@ -123,9 +82,6 @@
 
     </script>
 
-
-
 </body>
-
 
 </html>

@@ -1,8 +1,12 @@
 # WebRTC-chatting
 video/text chatting
 
-cd WebRTC-chatting
+How to run:
 
-npm install
+1. cd WebRTC-chatting
 
-node index.js
+2. npm install
+
+3. node index.js
+
+end.

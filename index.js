@@ -20,7 +20,7 @@ io.on("connection", function (socket) {
   io.sockets.emit("user-joined", {
     //소켓의 room을 따로 지정해주 않았기 때문에  clients()로 사용
     //모든 클라이언트들을 넘겨줌.
-    clients: Object.keys(io.sockets.clients()),
+    clients: Object.keys(io.sockets.clients().sockets),
     count: io.engine.clientsCount,
     joinedUserId: socket.id, //본인의 socket id
   });

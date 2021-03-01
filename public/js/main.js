@@ -75,7 +75,6 @@ function connectSocketToSignaling() {
               gotRemoteStream(event, userId);
             };
 
-            //connections[userId].onaddstream
             //비디오 보여줌.
             connections[userId].addStream(localStream);
           }
@@ -85,7 +84,7 @@ function connectSocketToSignaling() {
         if (data.count >= 2) {
           //description 교환. 나의 비디오가 상대방한테, 상대방의 비디오가 나한테 보여지는 과정.
           connections[joinedUserId]
-            .createOffer(offerOptions) // 수신자한테 전달함 sdp 생성.
+            .createOffer(offerOptions) //수신자한테 전달한 sdp 생성
             .then((description) => {
               connections[joinedUserId]
                 .setLocalDescription(description)
